@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- lib do map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <style>
+    /* Estilizando a barra de scroll*/
+
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #22c55e; 
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #15803d;
+    }
+
+</style>
+
+    <title>Countries API</title>
+</head>
+
+    <body class="h-screen flex flex-col">
+
+        <div id="header" class="h-20 w-full text-center content-center text-white text-2xl bg-[url('images/world-bg.jpg')] bg-cover bg-center bg-no-repeat flex-shrink-0 font-bold ">Projeto API Países</div>
+
+        <div id="main-container" class="flex-1 flex overflow-hidden">
+
+            <div id="sidebar" class="flex flex-col flew-wrap text-center w-1/6 bg-green-200 gap-6 p-3">
+
+                <div class="continent-wrapper ">
+                    <button onclick="toggleCountries('Africa', 'list-africa')" class="w-full h-12 rounded-md font-bold bg-green-500 text-white text-lg cursor-pointer hover:bg-green-700 my-2">África</button>
+                    <div id="list-africa" class="hidden bg-white rounded-md text-left text-sm py-2 px-4 shadow-inner max-h-60 overflow-y-auto"></div>
+                </div>
+
+                <div class="continent-wrapper">
+                    <button onclick="toggleCountries('Americas', 'list-america')" class="w-full h-12 rounded-md font-bold bg-green-500 text-white text-lg cursor-pointer hover:bg-green-700 my-2">América</button>
+                    <div id="list-america" class="hidden bg-white rounded-md text-left text-sm py-2 px-4 shadow-inner max-h-60 overflow-y-auto"></div>
+                </div>
+                
+                <div class="continent-wrapper">
+                    <button onclick="toggleCountries('Asia', 'list-asia')" class="w-full h-12 rounded-md font-bold bg-green-500 text-white text-lg cursor-pointer hover:bg-green-700 my-2">Ásia</button>
+                    <div id="list-asia" class="hidden bg-white rounded-md text-left text-sm py-2 px-4 shadow-inner max-h-60 overflow-y-auto"></div>
+                </div>
+
+                <div class="continent-wrapper">
+                    <button onclick="toggleCountries('Europe', 'list-europe')" class="w-full h-12 rounded-md font-bold bg-green-500 text-white text-lg cursor-pointer hover:bg-green-700 my-2">Europa</button>
+                    <div id="list-europe" class="hidden bg-white rounded-md text-left text-sm py-2 px-4 shadow-inner max-h-60 overflow-y-auto"></div>
+                </div>
+
+                <div class="continent-wrapper">
+                    <button onclick="toggleCountries('Antarctica', 'list-antarctica')" class="w-full h-12 rounded-md font-bold bg-green-500 text-white text-lg cursor-pointer hover:bg-green-700 my-2">Antártica</button>
+                    <div id="list-antarctica" class="hidden bg-white rounded-md text-left text-sm py-2 px-4 shadow-inner max-h-60 overflow-y-auto"></div>
+                </div>
+
+            </div>
+
+
+            <div id="content-container" class="w-full bg-gray-100 p-4 text-center content-center">
+                <p class="text-gray-400 font-bold">Por Favor, Selecione: Continente > País</p>
+            </div>
+
+           
+        </div>
+
+        <script src="scriptAPI.js"></script>
+    </body>
+
+</html>
