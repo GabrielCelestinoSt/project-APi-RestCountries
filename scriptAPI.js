@@ -22,24 +22,20 @@ function toggleCountries(continenteNome, containerId) {
         return;
     }
 
-    // me explica desse id^=
     document.querySelectorAll('[id^="list-"]').forEach(el => el.classList.add('hidden'));
 
-    // duvida sobre esse c.includes
     const countriesFiltered = allCountries.filter(country => {
         const regionMatch = country.region === continenteNome;
         const continentMatch = country.continents.some(c => c.includes(continenteNome));
         return regionMatch || continentMatch;
     });
 
-    // nao entendi como o sort e localecompare funciona
     countriesFiltered.sort((a, b) => a.name.common.localeCompare(b.name.common));
 
     if (countriesFiltered.length === 0) {
         container.innerHTML = `<div class="py-2 text-red-500">Nenhum país encontrado</div>`;
     } else {
-        
-        // como o map e join funciona
+ 
         container.innerHTML = countriesFiltered.map(country => `
             <div onclick="showCountryDetails('${country.cca3}')" class="py-1 border-b border-gray-100 hover:text-green-600 cursor-pointer">
                 ${country.translations.por?.common || country.name.common}
@@ -62,15 +58,13 @@ function showCountryDetails(cca3) {
     const lng = country.latlng[1];
 
     const contentContainer = document.getElementById('content-container');
-    
-    // Ajusta o container para ficar melhor alinhado
+
     contentContainer.className = "w-full bg-gray-100 p-8 overflow-y-auto";
 
-    // 3. Monta o Card HTML
     contentContainer.innerHTML = `
         <div class="bg-white rounded-xl shadow-lg p-6 max-w-4xl mx-auto">
             <div class="flex items-center gap-6 mb-6">
-                <img src="${country.flags.svg}" alt="Bandeira ${nomePT}" class="w-40 h-auto border border-gray-200 shadow-sm rounded">
+                <img src="${country.flags.svg}" class="w-40 h-auto border border-gray-200 shadow-sm rounded">
                 <div>
                     <h2 class="text-4xl font-bold text-gray-800">${nomePT}</h2>
                     <p class="text-gray-500 text-lg mt-1">${country.region} ${country.subregion ? `> ${country.subregion}` : ''}</p>
@@ -94,13 +88,11 @@ function showCountryDetails(cca3) {
     `;
 
     setTimeout(() => {
-    // 1. Limpa instância anterior se existir
     if (mapInstance !== null) {
         mapInstance.remove();
         mapInstance = null;
     }
 
-    // 2. Verifica se as coordenadas existem antes de criar o mapa
     if (lat !== undefined && lng !== undefined) {
         mapInstance = L.map('map').setView([lat, lng], 5);
 
@@ -109,8 +101,7 @@ function showCountryDetails(cca3) {
         }).addTo(mapInstance);
 
         L.marker([lat, lng]).addTo(mapInstance);
-        
-        // 3. Força o mapa a recalcular o tamanho (resolve o bloco cinza)
+
         mapInstance.invalidateSize();
     } else {
         console.error("Coordenadas não encontradas para este país");
