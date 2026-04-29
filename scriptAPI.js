@@ -30,7 +30,7 @@ function toggleCountries(continenteNome, containerId) {
         return regionMatch || continentMatch;
     });
 
-    countriesFiltered.sort((a, b) => a.name.common.localeCompare(b.name.common));
+    countriesFiltered.sort((a, b) => a.translations.por?.common.localeCompare(b.translations.por?.common));
 
     if (countriesFiltered.length === 0) {
         container.innerHTML = `<div class="py-2 text-red-500">Nenhum país encontrado</div>`;
